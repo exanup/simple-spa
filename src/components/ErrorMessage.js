@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class ErrorMessage extends Component {
   render () {
     return (
-      <div className="section has-text-centered">
+      <div className="has-text-centered">
         <article className="container message is-danger is-medium">
           <div className="message-header">
             <p>Error while fetching data from server</p>
