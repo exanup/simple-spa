@@ -1,34 +1,36 @@
-// import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import CommentsContainer from './CommentsContainer'
+import { formatAuthorName } from '../../utils/string'
 
-// export default class Post extends Component {
-//   render () {
-//     const id = this.props.id
-//     const title = this.props.title
-//     const body = this.props.body
-//     const author = this.props.author_id
-//     const createdAt = this.props.created_at
-//     const lastUpdatedAt = this.props.updated_at
+export default class Post extends Component {
+  render () {
+    const id = this.props.id
+    const title = this.props.title
+    const body = this.props.body
+    const createdAt = this.props.created_at
+    const lastUpdatedAt = this.props.updated_at
+    const author = formatAuthorName(this.props.author)
+    const comments = this.props.comments
 
-//     const postHref = `posts/${id}`
+    const postHref = `/posts/${id}`
 
-//     return (
-//       <Fragment>
-//         <div className="column is-half">
-//           <p className="title is-4">
-//             <a href={postHref}>{title}</a>
-//           </p>
-//           <p className="subtitle is-7">
-//             <span>{author}</span>
-//             <span>{createdAt}</span>
-//             <span>{lastUpdatedAt}</span>
-//           </p>
-//           <div className="content">
-//             {body}
-//             <br />
-//             <a href={postHref}>More...</a>
-//           </div>
-//         </div>
-//       </Fragment>
-//     )
-//   }
-// }
+    return (
+      <Fragment>
+        <div className="blog section">
+          <h2 className="title is-4">
+            <Link to={postHref}>{title}</Link>
+          </h2>
+          <p className="subtitle is-7 has-text-weight-light has-text-right">
+            Created: {createdAt} | Last Updated: {lastUpdatedAt} | by{' '}
+            <em>
+              <span className="has-text-link">{author}</span>
+            </em>
+          </p>
+          <p className="content has-text-justified">{body}</p>
+        </div>
+        <CommentsContainer comments={comments} />
+      </Fragment>
+    )
+  }
+}

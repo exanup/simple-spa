@@ -52,6 +52,7 @@ function withApi (WrappedComponent) {
         case Statuses.OK:
           return <WrappedComponent {...this.props} posts={this.state.posts} />
         case Statuses.ERROR:
+        default:
           return <ErrorMessage />
       }
     }

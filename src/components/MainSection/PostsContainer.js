@@ -1,18 +1,37 @@
 import React, { Component } from 'react'
-import TrimmedPost from './TrimmedPost'
+
 import withApi from '../withApi'
+import TrimmedPost from './TrimmedPost'
+import Post from './Post'
 
 class PostsContainer extends Component {
+  constructor (props) {
+    super(props)
+
+    const postId = props.match.params.id
+    this.state = {
+      currentPost: postId
+    }
+  }
+
   render () {
-    return (
-      <section className="section">
-        <div className="container">
-          <div className="columns is-multiline is-desktop">
-            {this.props.posts.map(post => <TrimmedPost key={post.id} {...post} />)}
-          </div>
+    const postId = this.state.currentPost
+    const key = postId - 1
+
+    let element
+    if (typeof postId === 'undefined' || !(key in this.props.posts)) {
+      const posts = this.props.posts
+      element = (
+        <div className="columns is-multiline is-desktop">
+          {posts.map(post => <TrimmedPost key={post.id} {...post} />)}
         </div>
-      </section>
-    )
+      )
+    } else {
+      const post = this.props.posts[key]
+      element = <Post {...post} />
+    }
+
+    return element
   }
 }
 
