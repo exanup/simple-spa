@@ -10,7 +10,7 @@ export default class CommentsContainer extends Component {
     let msg
     if (comments.length > 0) {
       msg = (
-        <p className="notification title is-4">
+        <p className="notification title is-6">
           Displaying {comments.length} comments
         </p>
       )
@@ -18,7 +18,7 @@ export default class CommentsContainer extends Component {
         <Comment key={comment.id} {...comment} />
       ))
     } else {
-      msg = <p className="notification title is-4">No comments to display</p>
+      msg = <p className="notification title is-6">No comments to display</p>
     }
 
     return (
