@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import './LoadingIndicator.css'
 
-function LoadingIndicator () {
-  return <div className="loader" />
+export default class LoadingIndicator extends Component {
+  render () {
+    return (
+      <div className="section has-text-centered">
+        <div className="spinner" />
+      </div>
+    )
+  }
 }
-
-export default LoadingIndicator

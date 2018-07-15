@@ -1,13 +1,17 @@
-import React, { Component, Fragment } from 'react'
-import Post from './Post'
+import React, { Component } from 'react'
+import TrimmedPost from './TrimmedPost'
 import withApi from '../withApi'
 
 class PostsContainer extends Component {
   render () {
     return (
-      <Fragment>
-        {this.props.posts.map(post => <Post key={post.id} {...post} />)}
-      </Fragment>
+      <section className="section">
+        <div className="container">
+          <div className="columns is-multiline is-desktop">
+            {this.props.posts.map(post => <TrimmedPost key={post.id} {...post} />)}
+          </div>
+        </div>
+      </section>
     )
   }
 }
