@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Post from './Post'
-import withApi from '../postWithApi'
+import withApi from './withPostApi'
 
 class PostController extends Component {
   render () {
