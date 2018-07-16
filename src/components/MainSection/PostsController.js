@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import withApi from '../postsWithApi'
+import withApi from './withPostsApi'
 import TrimmedPost from './TrimmedPost'
 
 class PostsController extends Component {

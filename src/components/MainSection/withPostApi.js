@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import * as api from '../services/api'
-import LoadingIndicator from './LoadingIndicator'
-import ErrorMessage from './ErrorMessage'
+import * as api from '../../services/post'
+import LoadingIndicator from '../LoadingIndicator'
+import ErrorMessage from '../ErrorMessage'
 
 const Statuses = {
   ERROR: 0,
@@ -12,25 +12,22 @@ const Statuses = {
 
 function withApi (WrappedComponent) {
   class EnhancedComponent extends Component {
-    constructor () {
-      super()
+    constructor (props) {
+      super(props)
 
       this.state = {
         status: Statuses.LOADING,
-        posts: []
+        post: {}
       }
     }
 
     async componentDidMount () {
       try {
-        const posts = await this.fetchPosts()
-
-        if (!Array.isArray(posts)) {
-          throw new Error('The data needs to be in array format')
-        }
+        const postId = this.props.match.params.id
+        const post = await this.fetchPost(postId)
 
         this.setState({
-          posts,
+          post,
           status: Statuses.OK
         })
       } catch (err) {
@@ -41,8 +38,8 @@ function withApi (WrappedComponent) {
       }
     }
 
-    fetchPosts () {
-      return api.fetchPosts()
+    fetchPost (postId) {
+      return api.fetchPost(postId)
     }
 
     render () {
@@ -50,7 +47,7 @@ function withApi (WrappedComponent) {
         case Statuses.LOADING:
           return <LoadingIndicator />
         case Statuses.OK:
-          return <WrappedComponent {...this.props} posts={this.state.posts} />
+          return <WrappedComponent {...this.props} post={this.state.post} />
         case Statuses.ERROR:
         default:
           return <ErrorMessage />
