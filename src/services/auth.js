@@ -15,3 +15,8 @@ export async function logout () {
   // debug
   return data
 }
+
+export async function register (body) {
+  const { data } = await http.post('/register', body)
+  return data
+}

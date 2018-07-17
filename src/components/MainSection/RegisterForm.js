@@ -1,10 +1,48 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { serialize } from 'dom-form-serializer'
+import * as auth from '../../services/auth'
 
 export default class RegisterForm extends Component {
-  handleSubmit = e => {
-    console.log('registering in...')
+  register = body => auth.register(body)
+
+  handleSubmit = async e => {
+    console.log('registering in 3, 2, 1...')
     e.preventDefault()
+    const $form = e.target.form
+    const formData = serialize($form)
+
+    try {
+      // hit the api with the data
+      const response = await this.register(formData)
+      console.log(response)
+
+      if (!response) throw new Error('Cannot create a new user')
+
+      console.log('new user created!')
+
+      // // store the access token and refresh token in the client
+      // localStorage.setItem('accessToken', response.accessToken)
+      // localStorage.setItem('refreshToken', response.refreshToken)
+      // localStorage.setItem('user', JSON.stringify(response.user))
+
+      // console.log(
+      //   'loggedIn',
+      //   response.accessToken,
+      //   response.refreshToken,
+      //   response.user
+      // )
+
+      // // lift up the state!
+      // this.props.onLogin(response.user)
+
+      // // The following is a hack to force react-router to re-render
+      // //  even if we are hitting the current url
+      // this.props.history.push({ pathname: '/empty' })
+      // this.props.history.go(-1)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   goToHome = () => {
@@ -38,6 +76,7 @@ export default class RegisterForm extends Component {
                     className="input is-medium"
                     type="text"
                     placeholder="First Name"
+                    name="firstName"
                   />
                   <span className="icon is-small is-left">
                     <i className="fas fa-pencil-alt" />
@@ -50,6 +89,7 @@ export default class RegisterForm extends Component {
                     className="input is-medium"
                     type="text"
                     placeholder="Last Name"
+                    name="lastName"
                   />
                   <span className="icon is-small is-left">
                     <i className="fas fa-pencil-alt" />
@@ -62,6 +102,7 @@ export default class RegisterForm extends Component {
                     className="input is-medium"
                     type="email"
                     placeholder="Email"
+                    name="email"
                   />
                   <span className="icon is-small is-left">
                     <i className="fas fa-envelope" />
@@ -74,6 +115,7 @@ export default class RegisterForm extends Component {
                     className="input is-medium"
                     type="password"
                     placeholder="Password"
+                    name="password"
                   />
                   <span className="icon is-small is-left">
                     <i className="fas fa-lock" />
