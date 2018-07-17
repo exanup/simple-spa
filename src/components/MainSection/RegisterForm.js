@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { serialize } from 'dom-form-serializer'
 import * as auth from '../../services/auth'
 
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
   register = body => auth.register(body)
 
   handleSubmit = async e => {
@@ -14,32 +14,15 @@ export default class RegisterForm extends Component {
 
     try {
       // hit the api with the data
-      const response = await this.register(formData)
-      console.log(response)
+      const newUser = await this.register(formData)
+      console.log(newUser)
 
-      if (!response) throw new Error('Cannot create a new user')
+      if (!newUser) throw new Error('Cannot create a new user')
 
       console.log('new user created!')
 
-      // // store the access token and refresh token in the client
-      // localStorage.setItem('accessToken', response.accessToken)
-      // localStorage.setItem('refreshToken', response.refreshToken)
-      // localStorage.setItem('user', JSON.stringify(response.user))
-
-      // console.log(
-      //   'loggedIn',
-      //   response.accessToken,
-      //   response.refreshToken,
-      //   response.user
-      // )
-
-      // // lift up the state!
-      // this.props.onLogin(response.user)
-
-      // // The following is a hack to force react-router to re-render
-      // //  even if we are hitting the current url
-      // this.props.history.push({ pathname: '/empty' })
-      // this.props.history.go(-1)
+      // TODO fire some kind of flash message that says user was created
+      this.props.history.push({ pathname: '/login' })
     } catch (err) {
       console.log(err)
     }
@@ -49,7 +32,7 @@ export default class RegisterForm extends Component {
     this.props.history.push({ pathname: '/' })
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate () {
     console.group('inside RegisterForm', this.props)
     const isLogged = !!this.props.user
     console.log('isLogged?', isLogged)
@@ -147,3 +130,5 @@ export default class RegisterForm extends Component {
     )
   }
 }
+
+export default withRouter(RegisterForm)
