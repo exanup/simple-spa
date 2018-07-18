@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { formatAuthorName } from '../../utils/string'
 import UserInfo from './UserInfo'
 import LogoutBtn from './LogoutBtn'
+import AddNewPostBtn from './AddNewPostBtn'
 
 class LoggedInControl extends Component {
   render () {
@@ -13,6 +14,7 @@ class LoggedInControl extends Component {
         <p className="buttons is-right">
           <UserInfo userName={userName} />
           <LogoutBtn onLogout={this.props.onLogout} />
+          <AddNewPostBtn />
         </p>
       </Fragment>
     )

@@ -28,3 +28,18 @@ export async function fetchPost (postId) {
   // debug
   return data
 }
+
+export async function addPost (post) {
+  const props = localStorage.accessToken
+    ? {
+      headers: {
+        Authorization: localStorage.accessToken
+      }
+    }
+    : null
+
+  console.log('Trying to add new post.')
+  const { data } = await http.post('/posts', props, post)
+  // debug
+  return data
+}
