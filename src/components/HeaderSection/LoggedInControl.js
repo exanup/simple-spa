@@ -13,8 +13,8 @@ class LoggedInControl extends Component {
       <Fragment>
         <p className="buttons is-right">
           <UserInfo userName={userName} />
-          <LogoutBtn onLogout={this.props.onLogout} />
           <AddNewPostBtn />
+          <LogoutBtn onLogout={this.props.onLogout} />
         </p>
       </Fragment>
     )

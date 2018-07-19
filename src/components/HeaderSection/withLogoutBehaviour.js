@@ -12,7 +12,11 @@ function withLogoutBehaviour (WrappedComponent) {
         // hit logout url
         const response = await this.logout()
         console.log(response)
-        if (response !== 1) throw Error('Could not log out')
+        if (response !== 1) {
+          console.log(
+            `Could not log out from server. Still destroying all the local stored keys`
+          )
+        }
 
         // need to delete all the saved data
         localStorage.removeItem('accessToken')
@@ -38,7 +42,9 @@ function withLogoutBehaviour (WrappedComponent) {
     }
 
     render () {
-      return <WrappedComponent handleLogout={this.handleLogout} {...this.props} />
+      return (
+        <WrappedComponent handleLogout={this.handleLogout} {...this.props} />
+      )
     }
   }
 }
