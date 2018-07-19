@@ -31,7 +31,7 @@ export default class Post extends Component {
           <PostControls post={this.props.post} user={this.props.user} />
           <p className="content has-text-justified">{body}</p>
         </div>
-        <CommentsContainer comments={comments} />
+        <CommentsContainer post={this.props.post} comments={comments} user={this.props.user} r/>
       </Fragment>
     )
   }
