@@ -25,7 +25,7 @@ export default class CommentsContainer extends Component {
       <div className="section">
         {msg}
         {commentsEl}
-        <AddNewComment />
+        {this.props.user ? <AddNewComment post={this.props.post} author={this.props.user} /> : ''}
       </div>
     )
   }

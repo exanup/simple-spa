@@ -8,7 +8,9 @@ class PostsController extends Component {
     const posts = this.props.posts
     return (
       <div className="columns is-multiline is-desktop">
-        {posts.map(post => <TrimmedPost key={post.id} {...post} />)}
+        {posts.map(post => (
+          <TrimmedPost key={post.id} user={this.props.user} post={post} />
+        ))}
       </div>
     )
   }

@@ -5,6 +5,9 @@ import PostsController from './PostsController'
 import PostController from './PostController'
 import RegisterForm from './RegisterForm'
 import LoginForm from './LoginForm'
+import AddNewPost from './AddNewPost'
+import ConfirmPostDelete from './ConfirmPostDelete'
+import EditPost from './EditPost'
 
 class MainSection extends Component {
   render () {
@@ -17,46 +20,52 @@ class MainSection extends Component {
             <Route
               exact
               path="/"
-              render={props => (
-                <PostsController
-                  {...props}
-                  onLogin={this.props.onLogin}
-                  onLogout={this.props.onLogout}
-                  user={this.props.user}
-                />
+              render={routerProps => (
+                <PostsController {...routerProps} user={this.props.user} />
               )}
             />
             <Route
               path="/posts/:id"
-              render={props => (
-                <PostController
-                  {...props}
-                  onLogin={this.props.onLogin}
-                  onLogout={this.props.onLogout}
-                  user={this.props.user}
-                />
+              render={routerProps => (
+                <PostController {...routerProps} user={this.props.user} />
               )}
             />
             <Route
               path="/register"
-              render={props => (
+              render={routerProps => (
                 <RegisterForm
-                  {...props}
+                  {...routerProps}
                   onLogin={this.props.onLogin}
-                  onLogout={this.props.onLogout}
                   user={this.props.user}
                 />
               )}
             />
             <Route
               path="/login"
-              render={props => (
+              render={routerProps => (
                 <LoginForm
-                  {...props}
+                  {...routerProps}
                   onLogin={this.props.onLogin}
-                  onLogout={this.props.onLogout}
                   user={this.props.user}
                 />
+              )}
+            />
+            <Route
+              path="/add-new-post"
+              render={routerProps => (
+                <AddNewPost {...routerProps} user={this.props.user} />
+              )}
+            />
+            <Route
+              path="/delete-post/:id"
+              render={routerProps => (
+                <ConfirmPostDelete {...routerProps} user={this.props.user} />
+              )}
+            />
+            <Route
+              path="/edit-post/:id"
+              render={routerProps => (
+                <EditPost {...routerProps} user={this.props.user} />
               )}
             />
           </div>

@@ -5,8 +5,7 @@ import withApi from './withPostApi'
 
 class PostController extends Component {
   render () {
-    const post = this.props.post
-    return <Post {...post} />
+    return <Post post={this.props.post} user={this.props.user} />
   }
 }
 
