@@ -50,7 +50,9 @@ class MainSection extends Component {
             />
             <Route
               path="/add-new-post"
-              render={routerProps => <AddNewPost {...routerProps} user={this.props.user} />}
+              render={routerProps => (
+                <AddNewPost {...routerProps} user={this.props.user} />
+              )}
             />
           </div>
         </section>

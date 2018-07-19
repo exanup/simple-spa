@@ -38,8 +38,8 @@ export async function addPost (post) {
     }
     : null
 
-  console.log('Trying to add new post.')
-  const { data } = await http.post('/posts', props, post)
+  console.log('Trying to add new post.', props)
+  const { data } = await http.post('/posts', post, props)
   // debug
   return data
 }
