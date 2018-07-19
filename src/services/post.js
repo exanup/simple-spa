@@ -43,3 +43,28 @@ export async function addPost (post) {
   // debug
   return data
 }
+
+export async function deletePost (postId) {
+  const props = localStorage.accessToken
+    ? {
+      headers: {
+        Authorization: localStorage.accessToken
+      }
+    }
+    : null
+
+  console.log(`Trying to delete post with ID ${postId}.`, props)
+  const { data } = await http.delete(`/posts/${postId}`, props)
+  // debug
+  return data
+}
+
+export async function editPost (postId, formData) {
+  const headers = { Authorization: localStorage.accessToken }
+
+  console.log(`Trying to edit post with ID ${postId}.`)
+  console.log(`/posts/${postId}`, formData, { headers })
+  const { data } = await http.put(`/posts/${postId}`, formData, { headers })
+  // debug
+  return data
+}

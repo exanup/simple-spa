@@ -8,7 +8,7 @@ function PostControls (props) {
       {props.user && props.user.id === props.post.author_id ? (
         <p className="buttons is-right">
           <EditPostBtn post={props.post} />
-          <DeletePostBtn post={props.post} />
+          <DeletePostBtn user={props.user} post={props.post} />
         </p>
       ) : (
         ''

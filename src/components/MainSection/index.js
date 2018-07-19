@@ -6,6 +6,8 @@ import PostController from './PostController'
 import RegisterForm from './RegisterForm'
 import LoginForm from './LoginForm'
 import AddNewPost from './AddNewPost'
+import ConfirmPostDelete from './ConfirmPostDelete'
+import EditPost from './EditPost'
 
 class MainSection extends Component {
   render () {
@@ -52,6 +54,18 @@ class MainSection extends Component {
               path="/add-new-post"
               render={routerProps => (
                 <AddNewPost {...routerProps} user={this.props.user} />
+              )}
+            />
+            <Route
+              path="/delete-post/:id"
+              render={routerProps => (
+                <ConfirmPostDelete {...routerProps} user={this.props.user} />
+              )}
+            />
+            <Route
+              path="/edit-post/:id"
+              render={routerProps => (
+                <EditPost {...routerProps} user={this.props.user} />
               )}
             />
           </div>

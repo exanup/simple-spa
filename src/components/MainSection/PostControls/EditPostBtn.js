@@ -6,7 +6,7 @@ function EditPostBtn (props) {
     <Fragment>
       <Link
         to={'/edit-post/' + props.post.id}
-        class="button is-info is-small is-outlined"
+        className="button is-info is-small is-outlined"
       >
         Edit
       </Link>
